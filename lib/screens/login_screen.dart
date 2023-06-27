@@ -30,63 +30,63 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Hero(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Flexible(
+              child: Hero(
                 tag: 'logo',
                 child: Container(
                   height: 100.0,
                   child: Image.asset('images/logo.png'),
                 ),
               ),
-              SizedBox(
-                height: 48.0,
-              ),
-              TextField(
-                onChanged: (value) {
-                  email = value;
-                },
-                decoration:
-                    kTextFieldDecoration.copyWith(hintText: 'Enter email'),
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              TextField(
-                onChanged: (value) {
-                  password = value;
-                },
-                decoration:
-                    kTextFieldDecoration.copyWith(hintText: 'Enter password'),
-              ),
-              SizedBox(
-                height: 24.0,
-              ),
-              RoundedButton(
-                buttonColor: Colors.lightBlueAccent,
-                buttonText: 'Log in',
-                onPressed: () async {
-                  setState(() {
-                    showLoadingIcon = true;
-                  });
-                  final cred = await _auth.signInWithEmailAndPassword(
-                      email: email!, password: password!);
-                  print("Signed in user: " + cred.user!.email.toString());
-                  Navigator.pushNamed(context, ChatScreen.id);
-                },
-              ),
-              Visibility(
-                visible: showLoadingIcon,
-                child: LoadingAnimationWidget.fourRotatingDots(
-                    color: Colors.lightBlueAccent, size: 100),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 48.0,
+            ),
+            TextField(
+              onChanged: (value) {
+                email = value;
+              },
+              decoration:
+                  kTextFieldDecoration.copyWith(hintText: 'Enter email'),
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            TextField(
+              onChanged: (value) {
+                password = value;
+              },
+              decoration:
+                  kTextFieldDecoration.copyWith(hintText: 'Enter password'),
+            ),
+            SizedBox(
+              height: 24.0,
+            ),
+            RoundedButton(
+              buttonColor: Colors.lightBlueAccent,
+              buttonText: 'Log in',
+              onPressed: () async {
+                setState(() {
+                  showLoadingIcon = true;
+                });
+                final cred = await _auth.signInWithEmailAndPassword(
+                    email: email!, password: password!);
+                print("Signed in user: " + cred.user!.email.toString());
+                Navigator.pushNamed(context, ChatScreen.id);
+              },
+            ),
+            Visibility(
+              visible: showLoadingIcon,
+              child: LoadingAnimationWidget.fourRotatingDots(
+                  color: Colors.lightBlueAccent, size: 100),
+            ),
+          ],
         ),
       ),
     );
